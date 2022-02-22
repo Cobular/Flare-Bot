@@ -4,6 +4,10 @@ from webserver import app
 import shelve
 import atexit
 from dataclasses import dataclass
+from os import environ
+from dotenv import load_dotenv
+
+load_dotenv()
 
 client = Client()
 my_shelf = shelve.open("./data_shelf")
@@ -30,7 +34,7 @@ async def something(
     command_str: SlashOption(name="Command to Invoke", required=True),
 ):
     bot_data = BotData(
-        
+
     )
     my_shelf[bot_id] = "eee"
 
@@ -38,4 +42,4 @@ PORT = "8333"
 
 client.loop.create_task(app.run_task("localhost", PORT))
 
-client.run("OTQ0MzQ1NDY5MTI2MDY2MjQw.YhAQQA.SmqEBwmSoUBQbq5QcdMO8V3ZcRA")
+client.run(environ.get("BOT_TOKEN"))
